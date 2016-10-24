@@ -1,25 +1,70 @@
 package org.cse390.githubhotness.models;
 
 import com.google.auto.value.AutoValue;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Simple class representing a repository.
  */
-@AutoValue
-public abstract class Repo {
-  public abstract int id();
-  public abstract String name();
-  public abstract String fullName();
-  public abstract String description();
-  public abstract int numStars();
-  public abstract String language();
-  public abstract String htmlUrl();
+public class Repo {
+  @SerializedName("full_name")
+  private String fullName;
 
-  static Repo create(int id, String name, String fullName, String description,
-                     int numStars, String language, String htmlUrl) {
-    // See "How do I...?" below for nested classes.
-    return new AutoValue_Repo(id, name, fullName, description, numStars,
-        language, htmlUrl);
+  @SerializedName("description")
+  private String description;
+
+  @SerializedName("stargazers_count")
+  private int numStars;
+
+  @SerializedName("html_url")
+  private String htmlUrl;
+
+  public Repo() {
+    this.fullName = null;
+    this.description = null;
+    this.numStars = -1;
+    this.htmlUrl = null;
   }
 
+  public String getFullName() {
+    return fullName;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public int getNumStars() {
+    return numStars;
+  }
+
+  public void setNumStars(int numStars) {
+    this.numStars = numStars;
+  }
+
+  public String getHtmlUrl() {
+    return htmlUrl;
+  }
+
+  public void setHtmlUrl(String htmlUrl) {
+    this.htmlUrl = htmlUrl;
+  }
+
+  @Override
+  public String toString() {
+    return "Repo{" +
+        "fullName='" + fullName + '\'' +
+        ", description='" + description + '\'' +
+        ", numStars=" + numStars +
+        ", htmlUrl='" + htmlUrl + '\'' +
+        '}';
+  }
 }
