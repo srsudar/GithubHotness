@@ -25,7 +25,14 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.squareup', module: 'javawriter'
     })
+
+    //Dagger 2
+    compile 'com.google.dagger:dagger:2.7'
+    apt 'com.google.dagger:dagger-compiler:2.7'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.google.auto.factory:auto-factory:1.0-beta3'
 
     provided 'com.google.auto.value:auto-value:1.2-rc1'
     compile "com.google.auto.value:auto-value:1.2-rc1"
@@ -40,7 +47,11 @@ dependencies {
 
     compile 'io.reactivex:rxjava:1.0.0'
     compile 'io.reactivex:rxandroid:0.23.0'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:converter-moshi:2.1.0'
 
     testCompile 'junit:junit:4.12'
 }
