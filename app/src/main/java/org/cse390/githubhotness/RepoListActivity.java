@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import org.cse390.githubhotness.net.GithubService;
 import org.cse390.githubhotness.net.SearchResponse;
-import org.cse390.githubhotness.net.ServiceFactory;
 import org.cse390.githubhotness.widgets.RepoRecyclerViewAdapter;
 
 import rx.Observable;
@@ -62,33 +61,32 @@ public class RepoListActivity extends AppCompatActivity {
     errorView.setVisibility(View.GONE);
     emptyView.setVisibility(View.GONE);
 
-    GithubService service = ServiceFactory.getGithubService();
-    mObservable = service.getRepos();
-    mObservable.subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Subscriber<SearchResponse>() {
-          @Override
-          public void onCompleted() {
-            Log.e(TAG, "onCompleted called");
-          }
-
-          @Override
-          public void onError(Throwable e) {
-            Log.e(TAG, "onError", e);
-            loadingView.setVisibility(View.GONE);
-            repoView.setVisibility(View.GONE);
-            errorView.setVisibility(View.VISIBLE);
-          }
-
-          @Override
-          public void onNext(SearchResponse searchResponse) {
-            Log.e(TAG, "onNextCalled");
-            loadingView.setVisibility(View.GONE);
-            repoView.setVisibility(View.VISIBLE);
-            adapter = new RepoRecyclerViewAdapter(searchResponse.getRepos());
-            repoView.setAdapter(adapter);
-          }
-        });
+//    mObservable = service.getRepos();
+//    mObservable.subscribeOn(Schedulers.io())
+//        .observeOn(AndroidSchedulers.mainThread())
+//        .subscribe(new Subscriber<SearchResponse>() {
+//          @Override
+//          public void onCompleted() {
+//            Log.e(TAG, "onCompleted called");
+//          }
+//
+//          @Override
+//          public void onError(Throwable e) {
+//            Log.e(TAG, "onError", e);
+//            loadingView.setVisibility(View.GONE);
+//            repoView.setVisibility(View.GONE);
+//            errorView.setVisibility(View.VISIBLE);
+//          }
+//
+//          @Override
+//          public void onNext(SearchResponse searchResponse) {
+//            Log.e(TAG, "onNextCalled");
+//            loadingView.setVisibility(View.GONE);
+//            repoView.setVisibility(View.VISIBLE);
+//            adapter = new RepoRecyclerViewAdapter(searchResponse.getRepos());
+//            repoView.setAdapter(adapter);
+//          }
+//        });
   }
 
   @Override

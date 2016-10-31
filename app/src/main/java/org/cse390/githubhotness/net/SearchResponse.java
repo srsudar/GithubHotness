@@ -1,6 +1,6 @@
 package org.cse390.githubhotness.net;
 
-import com.google.gson.annotations.SerializedName;
+import com.squareup.moshi.Json;
 
 import org.cse390.githubhotness.models.Repo;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 
 public class SearchResponse {
-  @SerializedName("items")
+  @Json(name = "items")
   private ArrayList<Repo> repos;
 
   public ArrayList<Repo> getRepos() {

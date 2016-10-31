@@ -1,22 +1,21 @@
 package org.cse390.githubhotness.models;
 
-import com.google.auto.value.AutoValue;
-import com.google.gson.annotations.SerializedName;
+import com.squareup.moshi.Json;
 
 /**
  * Simple class representing a repository.
  */
 public class Repo {
-  @SerializedName("full_name")
+  @Json(name = "full_name")
   private String fullName;
 
-  @SerializedName("description")
+  @Json(name = "description")
   private String description;
 
-  @SerializedName("stargazers_count")
+  @Json(name = "stargazers_count")
   private int numStars;
 
-  @SerializedName("html_url")
+  @Json(name = "html_url")
   private String htmlUrl;
 
   public Repo() {
