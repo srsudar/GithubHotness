@@ -57,13 +57,14 @@ public class RepoListActivity extends AppCompatActivity {
     errorView = (TextView) findViewById(R.id.repos_error);
     emptyView = (TextView) findViewById(R.id.repos_empty);
 
+    loadingView.setVisibility(View.VISIBLE);
     repoView.setVisibility(View.GONE);
     errorView.setVisibility(View.GONE);
     emptyView.setVisibility(View.GONE);
 
     GithubService service = ServiceFactory.getGithubService();
     mObservable = service.getRepos();
-    mObservable.subscribeOn(Schedulers.newThread())
+    mObservable.subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Subscriber<SearchResponse>() {
           @Override
