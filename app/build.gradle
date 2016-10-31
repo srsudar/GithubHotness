@@ -26,7 +26,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
-//        exclude group: 'com.squareup', module: 'javawriter'
     })
 
     //Dagger 2
@@ -50,9 +49,9 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.23.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'com.squareup.retrofit2:converter-moshi:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
     compile 'com.jakewharton.timber:timber:4.3.1'
 
     testCompile 'junit:junit:4.12'

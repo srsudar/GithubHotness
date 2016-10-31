@@ -36,6 +36,12 @@ public class RepoRecyclerViewAdapter extends RecyclerView.Adapter<RepoRecyclerVi
     }
   }
 
+  public void replaceDataset(List<Repo> repos) {
+    this.dataset.clear();
+    this.dataset.addAll(repos);
+    notifyDataSetChanged();
+  }
+
   @Override
   public RepoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     LayoutInflater inflater = LayoutInflater.from(parent.getContext());

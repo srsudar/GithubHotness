@@ -1,21 +1,21 @@
 package org.cse390.githubhotness.models;
 
-import com.squareup.moshi.Json;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Simple class representing a repository.
  */
 public class Repo {
-  @Json(name = "full_name")
+  @SerializedName("full_name")
   private String fullName;
 
-  @Json(name = "description")
+  @SerializedName("description")
   private String description;
 
-  @Json(name = "stargazers_count")
+  @SerializedName("stargazers_count")
   private int numStars;
 
-  @Json(name = "html_url")
+  @SerializedName("html_url")
   private String htmlUrl;
 
   public Repo() {

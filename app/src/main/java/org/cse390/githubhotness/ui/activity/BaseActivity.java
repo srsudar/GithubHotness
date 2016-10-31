@@ -1,4 +1,4 @@
-package org.cse390.githubhotness.ui;
+package org.cse390.githubhotness.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -12,9 +12,9 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.moshi.MoshiConverterFactory;
 
 /**
  * Module for providing Github dependencies. Modules are responsible for
@@ -55,7 +55,7 @@ public class GithubModule {
         .client(okHttpClient)
         .baseUrl(URL_GITHUB)
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        .addConverterFactory(MoshiConverterFactory.create());
+        .addConverterFactory(GsonConverterFactory.create());
     return builder.build();
   }
 
@@ -63,5 +63,11 @@ public class GithubModule {
   @Singleton
   public GithubService provideGithubService(Retrofit retrofit) {
     return retrofit.create(GithubService.class);
+  }
+
+  @Provides
+  @Singleton
+  public SearchManager provideSearchManager(GithubService githubService) {
+    return new SearchManager(githubService);
   }
 }
