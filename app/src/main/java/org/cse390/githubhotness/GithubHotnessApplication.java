@@ -3,8 +3,6 @@ package org.cse390.githubhotness;
 import android.app.Application;
 import android.content.Context;
 
-import com.frogermcs.androiddevmetrics.AndroidDevMetrics;
-
 import timber.log.Timber;
 
 /**
@@ -29,7 +27,6 @@ public class GithubHotnessApplication extends Application {
     super.onCreate();
     if (BuildConfig.DEBUG) {
       Timber.plant(new Timber.DebugTree());
-      AndroidDevMetrics.initWith(this);
     }
     initAppComponent();
   }
