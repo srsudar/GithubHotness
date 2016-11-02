@@ -1,5 +1,6 @@
 package org.cse390.githubhotness.ui.activity;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -55,9 +56,9 @@ public class RepoListActivityTest {
   @Mock
   RepoRecyclerViewAdapter mockAdapter;
   @Mock
-  LinearLayoutManager mockLayoutManager;
-  @Mock
   RecyclerView mockRecyclerView;
+  @Mock
+  SwipeRefreshLayout mockRefreshLayout;
 
   @Before
   public void before() {
@@ -70,6 +71,9 @@ public class RepoListActivityTest {
             invocation.getArguments()[0];
         activity.presenter = mockPresenter;
         activity.adapter = mockAdapter;
+        activity.layoutManager = new LinearLayoutManager(
+            RuntimeEnvironment.application
+        );
         return null;
       }
     })
@@ -86,23 +90,6 @@ public class RepoListActivityTest {
   @Test
   public void notNull() {
     assertThat(activity).isNotNull();
-  }
-
-  @Test
-  public void recyclerViewInitialized() {
-    // We can't do this without the ActivityController, as setupActivity
-    // calls the real recycler view with the mock layout manager, resulting
-    // in a layout error.
-    ActivityController<RepoListActivity> controller = Robolectric
-        .buildActivity(RepoListActivity.class).create();
-    activity = controller.get();
-    activity.rvRepos = mockRecyclerView;
-    activity.layoutManager = mockLayoutManager;
-
-    activity = controller.start().get();
-
-    verify(mockRecyclerView, times(1)).setLayoutManager(mockLayoutManager);
-    verify(mockRecyclerView, times(1)).setAdapter(mockAdapter);
   }
 
   @Test
@@ -127,34 +114,46 @@ public class RepoListActivityTest {
   }
 
   @Test
-  public void updateViewStateHidesCorrectly() {
-    View vError = activity.tvError;
-    View vLoading = activity.vLoading;
-    View vRepos = activity.rvRepos;
-    View vEmpty = activity.tvEmpty;
-
+  public void updateViewStateCorrect_error() {
+    injectMockSwipeToRefresh();
     activity.updateViewState(RepoListActivity.RecyclerViewState.ERROR);
-    assertThat(vError).isVisible();
-    assertThat(vLoading).isGone();
-    assertThat(vRepos).isGone();
-    assertThat(vEmpty).isGone();
+    assertThat(activity.tvError).isVisible();
+    assertThat(activity.tvEmpty).isGone();
+    assertThat(activity.rvRepos).isGone();
+    verify(activity.refreshLayout, times(1)).setRefreshing(false);
+  }
 
+  @Test
+  public void updateViewStateCorrect_loaded() {
+    injectMockSwipeToRefresh();
     activity.updateViewState(RepoListActivity.RecyclerViewState.LOADED);
-    assertThat(vError).isGone();
-    assertThat(vLoading).isGone();
-    assertThat(vRepos).isVisible();
-    assertThat(vEmpty).isGone();
+    assertThat(activity.tvError).isGone();
+    assertThat(activity.tvEmpty).isGone();
+    assertThat(activity.rvRepos).isVisible();
+    verify(activity.refreshLayout, times(1)).setRefreshing(false);
+  }
 
+  @Test
+  public void updateViewStateCorrect_loading() {
+    injectMockSwipeToRefresh();
     activity.updateViewState(RepoListActivity.RecyclerViewState.LOADING);
-    assertThat(vError).isGone();
-    assertThat(vLoading).isVisible();
-    assertThat(vRepos).isGone();
-    assertThat(vEmpty).isGone();
+    assertThat(activity.tvError).isGone();
+    assertThat(activity.tvEmpty).isGone();
+    assertThat(activity.rvRepos).isVisible();
+    verify(activity.refreshLayout, times(1)).setRefreshing(true);
+  }
 
+  @Test
+  public void updateViewStateCorrect_empty() {
+    injectMockSwipeToRefresh();
     activity.updateViewState(RepoListActivity.RecyclerViewState.EMPTY);
-    assertThat(vError).isGone();
-    assertThat(vLoading).isGone();
-    assertThat(vRepos).isGone();
-    assertThat(vEmpty).isVisible();
+    assertThat(activity.tvError).isGone();
+    assertThat(activity.rvRepos).isGone();
+    assertThat(activity.tvEmpty).isVisible();
+    verify(activity.refreshLayout, times(1)).setRefreshing(false);
+  }
+
+  private void injectMockSwipeToRefresh() {
+    activity.refreshLayout = mockRefreshLayout;
   }
 }

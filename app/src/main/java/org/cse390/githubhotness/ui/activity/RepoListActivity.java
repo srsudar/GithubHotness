@@ -37,7 +37,6 @@ public class RepoListActivity extends BaseActivity {
   @BindView(R.id.repos) RecyclerView rvRepos;
   @BindView(R.id.repos_error) TextView tvError;
   @BindView(R.id.repos_empty) TextView tvEmpty;
-  @BindView(R.id.repos_loading) View vLoading;
   @BindView(R.id.repo_fab) FloatingActionButton fab;
   @BindView(R.id.swipe_refresh_repos) SwipeRefreshLayout refreshLayout;
 
@@ -50,24 +49,16 @@ public class RepoListActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_repo_list);
     ButterKnife.bind(this);
-  }
 
-  @Override
-  protected void onStart() {
-    super.onStart();
-
-    // Do this here to give us a chance to override butterknife bindings in
-    // tests.
     refreshLayout.setOnRefreshListener(
         new SwipeRefreshLayout.OnRefreshListener() {
-      @Override
-      public void onRefresh() {
-        presenter.loadSearchResults();
-      }
-    });
+          @Override
+          public void onRefresh() {
+            presenter.loadSearchResults();
+          }
+        });
     setupRepoListView();
     presenter.loadSearchResults();
-    rvRepos.setNestedScrollingEnabled(true);
   }
 
   @Override
@@ -81,7 +72,6 @@ public class RepoListActivity extends BaseActivity {
   @SuppressWarnings("unused")
   @OnClick(R.id.repo_fab)
   void fabClicked() {
-    updateViewState(RecyclerViewState.LOADING);
     presenter.loadSearchResults();
   }
 
@@ -99,26 +89,23 @@ public class RepoListActivity extends BaseActivity {
       case LOADING:
         tvError.setVisibility(View.GONE);
         tvEmpty.setVisibility(View.GONE);
-        rvRepos.setVisibility(View.GONE);
-        vLoading.setVisibility(View.VISIBLE);
+        rvRepos.setVisibility(View.VISIBLE);
+        refreshLayout.setRefreshing(true);
         break;
       case EMPTY:
         tvError.setVisibility(View.GONE);
         rvRepos.setVisibility(View.GONE);
-        vLoading.setVisibility(View.GONE);
         tvEmpty.setVisibility(View.VISIBLE);
         refreshLayout.setRefreshing(false);
         break;
       case LOADED:
         tvError.setVisibility(View.GONE);
         tvEmpty.setVisibility(View.GONE);
-        vLoading.setVisibility(View.GONE);
         rvRepos.setVisibility(View.VISIBLE);
         refreshLayout.setRefreshing(false);
         break;
       case ERROR:
         rvRepos.setVisibility(View.GONE);
-        vLoading.setVisibility(View.GONE);
         tvEmpty.setVisibility(View.GONE);
         tvError.setVisibility(View.VISIBLE);
         refreshLayout.setRefreshing(false);
