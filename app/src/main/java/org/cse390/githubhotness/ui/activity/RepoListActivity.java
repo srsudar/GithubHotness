@@ -45,7 +45,14 @@ public class RepoListActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_repo_list);
     ButterKnife.bind(this);
+  }
 
+  @Override
+  protected void onStart() {
+    super.onStart();
+
+    // Do this here to give us a chance to override butterknife bindings in
+    // tests.
     setupRepoListView();
     presenter.loadSearchResults();
   }
