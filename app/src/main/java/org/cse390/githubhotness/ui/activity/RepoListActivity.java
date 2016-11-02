@@ -2,6 +2,7 @@ package org.cse390.githubhotness.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -38,6 +39,7 @@ public class RepoListActivity extends BaseActivity {
   @BindView(R.id.repos_empty) TextView tvEmpty;
   @BindView(R.id.repos_loading) View vLoading;
   @BindView(R.id.repo_fab) FloatingActionButton fab;
+  @BindView(R.id.swipe_refresh_repos) SwipeRefreshLayout refreshLayout;
 
   @Inject RepoRecyclerViewAdapter adapter;
   @Inject LinearLayoutManager layoutManager;
@@ -56,8 +58,16 @@ public class RepoListActivity extends BaseActivity {
 
     // Do this here to give us a chance to override butterknife bindings in
     // tests.
+    refreshLayout.setOnRefreshListener(
+        new SwipeRefreshLayout.OnRefreshListener() {
+      @Override
+      public void onRefresh() {
+        presenter.loadSearchResults();
+      }
+    });
     setupRepoListView();
     presenter.loadSearchResults();
+    rvRepos.setNestedScrollingEnabled(true);
   }
 
   @Override
@@ -97,18 +107,21 @@ public class RepoListActivity extends BaseActivity {
         rvRepos.setVisibility(View.GONE);
         vLoading.setVisibility(View.GONE);
         tvEmpty.setVisibility(View.VISIBLE);
+        refreshLayout.setRefreshing(false);
         break;
       case LOADED:
         tvError.setVisibility(View.GONE);
         tvEmpty.setVisibility(View.GONE);
         vLoading.setVisibility(View.GONE);
         rvRepos.setVisibility(View.VISIBLE);
+        refreshLayout.setRefreshing(false);
         break;
       case ERROR:
         rvRepos.setVisibility(View.GONE);
         vLoading.setVisibility(View.GONE);
         tvEmpty.setVisibility(View.GONE);
         tvError.setVisibility(View.VISIBLE);
+        refreshLayout.setRefreshing(false);
         break;
       default:
         Timber.e("Unrecognized view state: %i", state);
