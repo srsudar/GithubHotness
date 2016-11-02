@@ -32,6 +32,7 @@ import static org.assertj.android.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -109,6 +110,20 @@ public class RepoListActivityTest {
     List<Repo> repos = new ArrayList<>();
     activity.setRepos(repos);
     verify(mockAdapter, times(1)).replaceDataset(repos);
+  }
+
+  @Test
+  public void searchResultsAutoLoad() {
+    verify(mockPresenter, times(1)).loadSearchResults();
+  }
+
+  @Test
+  public void clickingFabLoadsRepos() {
+    // Replace the presenter to avoid the autoclick.
+    mockPresenter = mock(RepoListActivityPresenter.class);
+    activity.presenter = mockPresenter;
+    activity.fab.performClick();
+    verify(mockPresenter, times(1)).loadSearchResults();
   }
 
   @Test

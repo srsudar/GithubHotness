@@ -1,6 +1,7 @@
 package org.cse390.githubhotness.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import timber.log.Timber;
 
 import static org.cse390.githubhotness.ui.activity.RepoListActivity.RecyclerViewState.LOADING;
@@ -35,6 +37,7 @@ public class RepoListActivity extends BaseActivity {
   @BindView(R.id.repos_error) TextView tvError;
   @BindView(R.id.repos_empty) TextView tvEmpty;
   @BindView(R.id.repos_loading) View vLoading;
+  @BindView(R.id.repo_fab) FloatingActionButton fab;
 
   @Inject RepoRecyclerViewAdapter adapter;
   @Inject LinearLayoutManager layoutManager;
@@ -63,6 +66,13 @@ public class RepoListActivity extends BaseActivity {
         .getAppComponent()
         .plus(new RepoListActivityModule(this))
         .inject(this);
+  }
+
+  @SuppressWarnings("unused")
+  @OnClick(R.id.repo_fab)
+  void fabClicked() {
+    updateViewState(RecyclerViewState.LOADING);
+    presenter.loadSearchResults();
   }
 
   public void setRepos(List<Repo> repos) {
