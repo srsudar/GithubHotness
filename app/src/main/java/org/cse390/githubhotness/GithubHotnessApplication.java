@@ -3,6 +3,8 @@ package org.cse390.githubhotness;
 import android.app.Application;
 import android.content.Context;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import timber.log.Timber;
 
 /**
@@ -25,6 +27,7 @@ public class GithubHotnessApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
+    JodaTimeAndroid.init(this);
     if (BuildConfig.DEBUG) {
       Timber.plant(new Timber.DebugTree());
     }
