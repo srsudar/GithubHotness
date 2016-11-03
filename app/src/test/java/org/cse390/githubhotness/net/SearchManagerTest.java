@@ -46,11 +46,17 @@ public class SearchManagerTest {
     // for now.
     MockitoAnnotations.initMocks(this);
     Observable<SearchResponse> response = Observable.just(mockReponse);
-    when(mockGithubServicel.searchMostPopularRepos()).thenReturn(response);
+    when(mockGithubService.searchMostPopularRepos(
+        any(String.class),
+        any(String.class),
+        any(String.class),
+        any(Integer.class)
+    )).thenReturn(response);
 
     searchManager = new SearchManager(mockGithubService);
 
-    Observable<SearchResponse> actual = searchManager.getSearchResponse();
+    Observable<SearchResponse> actual = searchManager.getSearchResponse("sort",
+        25);
     // What I'd actually like to do here is assert that it is the result of
     // observeOn, but I'm not going to get that without a deeper
     // understanding of RxJava and its testing mechanisms, which is for now

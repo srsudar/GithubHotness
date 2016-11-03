@@ -48,14 +48,6 @@ public class RepoListActivityTest {
 
   @Mock
   RepoListActivityComponent mockRepoListActivityComponent;
-  @Mock
-  RepoListViewPresenter mockPresenter;
-  @Mock
-  RepoRecyclerViewAdapter mockAdapter;
-  @Mock
-  RecyclerView mockRecyclerView;
-  @Mock
-  SwipeRefreshLayout mockRefreshLayout;
 
   @Before
   public void before() {
@@ -66,11 +58,11 @@ public class RepoListActivityTest {
       public Object answer(InvocationOnMock invocation) {
         RepoListActivity activity = (RepoListActivity)
             invocation.getArguments()[0];
-        activity.presenter = mockPresenter;
-        activity.adapter = mockAdapter;
-        activity.layoutManager = new LinearLayoutManager(
-            RuntimeEnvironment.application
-        );
+//        activity.presenter = mockPresenter;
+//        activity.adapter = mockAdapter;
+//        activity.layoutManager = new LinearLayoutManager(
+//            RuntimeEnvironment.application
+//        );
         return null;
       }
     })
@@ -89,68 +81,11 @@ public class RepoListActivityTest {
     assertThat(activity).isNotNull();
   }
 
-  @Test
-  public void setReposUpdatesAdapter() {
-    List<Repo> repos = new ArrayList<>();
-    activity.setRepos(repos);
-    verify(mockAdapter, times(1)).replaceDataset(repos);
-  }
+//  @Test
+//  public void searchResultsAutoLoad() {
+//    verify(mockPresenter, times(1)).loadSearchResults();
+//  }
 
-  @Test
-  public void searchResultsAutoLoad() {
-    verify(mockPresenter, times(1)).loadSearchResults();
-  }
 
-  @Test
-  public void clickingFabLoadsRepos() {
-    // Replace the presenter to avoid the autoclick.
-    mockPresenter = mock(RepoListViewPresenter.class);
-    activity.presenter = mockPresenter;
-    activity.fab.performClick();
-    verify(mockPresenter, times(1)).loadSearchResults();
-  }
 
-  @Test
-  public void updateViewStateCorrect_error() {
-    injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListViewPresenter.ViewState.ERROR);
-    assertThat(activity.tvError).isVisible();
-    assertThat(activity.tvEmpty).isGone();
-    assertThat(activity.rvRepos).isGone();
-    verify(activity.refreshLayout, times(1)).setRefreshing(false);
-  }
-
-  @Test
-  public void updateViewStateCorrect_loaded() {
-    injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListViewPresenter.ViewState.LOADED);
-    assertThat(activity.tvError).isGone();
-    assertThat(activity.tvEmpty).isGone();
-    assertThat(activity.rvRepos).isVisible();
-    verify(activity.refreshLayout, times(1)).setRefreshing(false);
-  }
-
-  @Test
-  public void updateViewStateCorrect_loading() {
-    injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListViewPresenter.ViewState.LOADING);
-    assertThat(activity.tvError).isGone();
-    assertThat(activity.tvEmpty).isGone();
-    assertThat(activity.rvRepos).isVisible();
-    verify(activity.refreshLayout, times(1)).setRefreshing(true);
-  }
-
-  @Test
-  public void updateViewStateCorrect_empty() {
-    injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListViewPresenter.ViewState.EMPTY);
-    assertThat(activity.tvError).isGone();
-    assertThat(activity.rvRepos).isGone();
-    assertThat(activity.tvEmpty).isVisible();
-    verify(activity.refreshLayout, times(1)).setRefreshing(false);
-  }
-
-  private void injectMockSwipeToRefresh() {
-    activity.refreshLayout = mockRefreshLayout;
-  }
 }

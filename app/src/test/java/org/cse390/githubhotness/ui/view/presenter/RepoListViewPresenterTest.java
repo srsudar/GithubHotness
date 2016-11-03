@@ -1,4 +1,4 @@
-package org.cse390.githubhotness.ui.activity.presenter;
+package org.cse390.githubhotness.ui.view.presenter;
 
 import org.cse390.githubhotness.BuildConfig;
 import org.cse390.githubhotness.TestGithubHotnessApplication;
@@ -6,7 +6,7 @@ import org.cse390.githubhotness.logic.TimeStamper;
 import org.cse390.githubhotness.models.Repo;
 import org.cse390.githubhotness.net.SearchManager;
 import org.cse390.githubhotness.net.SearchResponse;
-import org.cse390.githubhotness.ui.view.presenter.RepoListViewPresenter;
+import org.cse390.githubhotness.ui.view.RepoListView;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +22,7 @@ import java.util.Arrays;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -54,7 +55,8 @@ public class RepoListViewPresenterTest {
   private TestSubscriber<SearchResponse> setupError(Throwable throwable) {
     Observable<SearchResponse> observable = Observable.error(throwable);
 
-    when(mockSearchManager.getSearchResponse()).thenReturn(observable);
+    when(mockSearchManager.getSearchResponse(any(String.class), any(Integer
+        .class))).thenReturn(observable);
 
     TestSubscriber<SearchResponse> responseTestSubscriber = new
         TestSubscriber<>();
@@ -66,7 +68,8 @@ public class RepoListViewPresenterTest {
       SearchResponse response) {
     Observable<SearchResponse> observable = Observable.just(response);
 
-    when(mockSearchManager.getSearchResponse()).thenReturn(observable);
+    when(mockSearchManager.getSearchResponse(any(String.class), any(Integer
+        .class))).thenReturn(observable);
 
     TestSubscriber<SearchResponse> responseTestSubscriber = new
         TestSubscriber<>();
@@ -78,7 +81,7 @@ public class RepoListViewPresenterTest {
   public void loadSearchResults_updatesViewToLoading() {
     loadSearchResultsHelper();
     verify(mockCallbacks, times(1))
-        .updateViewState(RepoListViewPresenter.ViewState.LOADING);
+        .updateViewState(RepoListView.ViewState.LOADING);
   }
 
   @Test
@@ -88,7 +91,7 @@ public class RepoListViewPresenterTest {
     response.setRepos(repos);
     TestSubscriber<SearchResponse> subscriber = setupRepoResponse(response);
 
-    presenter.loadSearchResults();
+    presenter.loadSearchResults(RepoListViewPresenter.SearchPeriod.MONTH);
 
     subscriber.assertNoErrors();
     subscriber.assertValue(response);
@@ -96,7 +99,7 @@ public class RepoListViewPresenterTest {
 
     verify(mockCallbacks, times(1)).setRepos(repos);
     verify(mockCallbacks, times(1))
-        .updateViewState(RepoListViewPresenter.ViewState.EMPTY);
+        .updateViewState(RepoListView.ViewState.EMPTY);
   }
 
   @Test
@@ -104,12 +107,12 @@ public class RepoListViewPresenterTest {
     Throwable throwable = new IOException();
     TestSubscriber<SearchResponse> subscriber = setupError(throwable);
 
-    presenter.loadSearchResults();
+    presenter.loadSearchResults(RepoListViewPresenter.SearchPeriod.MONTH);
 
     subscriber.assertError(throwable);
 
     verify(mockCallbacks, times(1))
-        .updateViewState(RepoListViewPresenter.ViewState.ERROR);
+        .updateViewState(RepoListView.ViewState.ERROR);
   }
 
   @Test
@@ -126,7 +129,7 @@ public class RepoListViewPresenterTest {
     response.setRepos(repos);
     TestSubscriber<SearchResponse> subscriber = setupRepoResponse(response);
 
-    presenter.loadSearchResults();
+    presenter.loadSearchResults(RepoListViewPresenter.SearchPeriod.MONTH);
 
     subscriber.assertNoErrors();
     subscriber.assertValue(response);
@@ -134,6 +137,6 @@ public class RepoListViewPresenterTest {
 
     verify(mockCallbacks, times(1)).setRepos(repos);
     verify(mockCallbacks, times(1))
-        .updateViewState(RepoListViewPresenter.ViewState.LOADED);
+        .updateViewState(RepoListView.ViewState.LOADED);
   }
 }
