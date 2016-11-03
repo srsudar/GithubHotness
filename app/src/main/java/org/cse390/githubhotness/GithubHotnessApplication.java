@@ -5,6 +5,10 @@ import android.content.Context;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
+import org.cse390.githubhotness.injection.AppComponent;
+import org.cse390.githubhotness.injection.AppModule;
+import org.cse390.githubhotness.injection.DaggerAppComponent;
+
 import timber.log.Timber;
 
 /**

@@ -46,7 +46,7 @@ public class SearchManagerTest {
     // for now.
     MockitoAnnotations.initMocks(this);
     Observable<SearchResponse> response = Observable.just(mockReponse);
-    when(mockGithubService.searchMostPopularRepos()).thenReturn(response);
+    when(mockGithubServicel.searchMostPopularRepos()).thenReturn(response);
 
     searchManager = new SearchManager(mockGithubService);
 

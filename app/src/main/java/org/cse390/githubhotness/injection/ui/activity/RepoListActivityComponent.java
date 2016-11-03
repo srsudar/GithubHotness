@@ -1,10 +1,7 @@
-package org.cse390.githubhotness.ui.activity.component;
+package org.cse390.githubhotness.injection.ui.activity;
 
-import org.cse390.githubhotness.ui.activity.ActivityScope;
 import org.cse390.githubhotness.ui.activity.RepoListActivity;
-import org.cse390.githubhotness.ui.activity.module.RepoListActivityModule;
 
-import dagger.Component;
 import dagger.Subcomponent;
 
 /**

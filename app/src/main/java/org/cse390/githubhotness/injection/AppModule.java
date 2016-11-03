@@ -1,4 +1,4 @@
-package org.cse390.githubhotness;
+package org.cse390.githubhotness.injection;
 
 import android.app.Application;
 

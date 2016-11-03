@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <!-- This isn't inflated, it's just here to create safe ids for us to use in code. -->
+    <org.cse390.githubhotness.ui.view.RepoListView
+            android:id="@+id/repos_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <org.cse390.githubhotness.ui.view.RepoListView
+            android:id="@+id/repos_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <org.cse390.githubhotness.ui.view.RepoListView
+            android:id="@+id/repos_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

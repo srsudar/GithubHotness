@@ -1,8 +1,10 @@
-package org.cse390.githubhotness.net;
+package org.cse390.githubhotness.injection.net;
 
 import android.app.Application;
 
 import org.cse390.githubhotness.BuildConfig;
+import org.cse390.githubhotness.net.GithubService;
+import org.cse390.githubhotness.net.SearchManager;
 
 import java.util.concurrent.TimeUnit;
 

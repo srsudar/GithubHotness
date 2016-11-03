@@ -1,4 +1,4 @@
-package org.cse390.githubhotness.ui.activity.presenter;
+package org.cse390.githubhotness.ui.view.presenter;
 
 import android.support.annotation.NonNull;
 
@@ -6,6 +6,7 @@ import org.cse390.githubhotness.logic.TimeStamper;
 import org.cse390.githubhotness.models.Repo;
 import org.cse390.githubhotness.net.SearchManager;
 import org.cse390.githubhotness.net.SearchResponse;
+import org.cse390.githubhotness.ui.view.RepoListView;
 import org.joda.time.DateTime;
 
 import java.util.List;
@@ -17,17 +18,13 @@ import timber.log.Timber;
  * Created by sudars on 10/31/16.
  */
 
-public class RepoListActivityPresenter {
-  public enum ViewState {
-    LOADING, LOADED, EMPTY, ERROR
-  }
-
+public class RepoListViewPresenter {
   public enum SearchPeriod {
     MONTH, WEEK, DAY
   }
 
   public interface PresenterCallbacks {
-    void updateViewState(ViewState viewState);
+    void updateViewState(RepoListView.ViewState viewState);
     void setRepos(List<Repo> repos);
   }
 
@@ -35,7 +32,7 @@ public class RepoListActivityPresenter {
   private SearchManager searchManager;
   private TimeStamper timeStamper;
 
-  public RepoListActivityPresenter(PresenterCallbacks callbacks,
+  public RepoListViewPresenter(PresenterCallbacks callbacks,
       SearchManager searchManager, TimeStamper timeStamper) {
     this.callbacks = callbacks;
     this.searchManager = searchManager;
@@ -61,8 +58,8 @@ public class RepoListActivityPresenter {
     return result;
   }
 
-  public void loadSearchResults(SearchPeriod searchPeriod) {
-    callbacks.updateViewState(ViewState.LOADING);
+  public void loadSearchResults(final SearchPeriod searchPeriod) {
+    callbacks.updateViewState(RepoListView.ViewState.LOADING);
     String dateString = getStringForPeriod(searchPeriod);
     searchManager.getSearchResponse(dateString,
         SearchManager.DEFAULT_PER_PAGE)
@@ -75,16 +72,16 @@ public class RepoListActivityPresenter {
       @Override
       public void onError(Throwable e) {
         Timber.e(e);
-        callbacks.updateViewState(ViewState.ERROR);
+        callbacks.updateViewState(RepoListView.ViewState.ERROR);
       }
 
       @Override
       public void onNext(SearchResponse searchResponse) {
         callbacks.setRepos(searchResponse.getRepos());
         if (searchResponse.getRepos().isEmpty()) {
-          callbacks.updateViewState(ViewState.EMPTY);
+          callbacks.updateViewState(RepoListView.ViewState.EMPTY);
         } else {
-          callbacks.updateViewState(ViewState.LOADED);
+          callbacks.updateViewState(RepoListView.ViewState.LOADED);
         }
       }
     });

@@ -1,45 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     android:id="@+id/content_repo_list"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="org.cse390.githubhotness.RepoListActivity"
+    tools:context="org.cse390.githubhotness.ui.activity.RepoListActivity"
     tools:showIn="@layout/activity_repo_list">
 
-    <RelativeLayout
+    <android.support.design.widget.TabLayout
+            android:id="@+id/repos_tab_layout"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content" />
 
-      <android.support.v4.widget.SwipeRefreshLayout
-              android:id="@+id/swipe_refresh_repos"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/repos"
+    <android.support.v4.view.ViewPager
+            android:id="@+id/repos_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
-      </android.support.v4.widget.SwipeRefreshLayout>
 
-      <TextView
-          android:id="@+id/repos_empty"
-          android:gravity="center"
-          android:text="@string/empty"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"/>
-
-      <TextView
-          android:id="@+id/repos_error"
-          android:text="@string/error"
-          android:gravity="center"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"/>
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</LinearLayout>

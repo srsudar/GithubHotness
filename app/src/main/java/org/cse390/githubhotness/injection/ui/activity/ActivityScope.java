@@ -1,4 +1,4 @@
-package org.cse390.githubhotness.ui.activity;
+package org.cse390.githubhotness.injection.ui.activity;
 
 import javax.inject.Scope;
 

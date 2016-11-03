@@ -3,14 +3,12 @@ package org.cse390.githubhotness.ui.activity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import org.cse390.githubhotness.BuildConfig;
 import org.cse390.githubhotness.TestGithubHotnessApplication;
 import org.cse390.githubhotness.models.Repo;
-import org.cse390.githubhotness.ui.activity.component.RepoListActivityComponent;
-import org.cse390.githubhotness.ui.activity.module.RepoListActivityModule;
-import org.cse390.githubhotness.ui.activity.presenter.RepoListActivityPresenter;
+import org.cse390.githubhotness.injection.ui.activity.RepoListActivityComponent;
+import org.cse390.githubhotness.ui.view.presenter.RepoListViewPresenter;
 import org.cse390.githubhotness.widgets.RepoRecyclerViewAdapter;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +21,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ActivityController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +49,7 @@ public class RepoListActivityTest {
   @Mock
   RepoListActivityComponent mockRepoListActivityComponent;
   @Mock
-  RepoListActivityPresenter mockPresenter;
+  RepoListViewPresenter mockPresenter;
   @Mock
   RepoRecyclerViewAdapter mockAdapter;
   @Mock
@@ -107,7 +104,7 @@ public class RepoListActivityTest {
   @Test
   public void clickingFabLoadsRepos() {
     // Replace the presenter to avoid the autoclick.
-    mockPresenter = mock(RepoListActivityPresenter.class);
+    mockPresenter = mock(RepoListViewPresenter.class);
     activity.presenter = mockPresenter;
     activity.fab.performClick();
     verify(mockPresenter, times(1)).loadSearchResults();
@@ -116,7 +113,7 @@ public class RepoListActivityTest {
   @Test
   public void updateViewStateCorrect_error() {
     injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListActivityPresenter.ViewState.ERROR);
+    activity.updateViewState(RepoListViewPresenter.ViewState.ERROR);
     assertThat(activity.tvError).isVisible();
     assertThat(activity.tvEmpty).isGone();
     assertThat(activity.rvRepos).isGone();
@@ -126,7 +123,7 @@ public class RepoListActivityTest {
   @Test
   public void updateViewStateCorrect_loaded() {
     injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListActivityPresenter.ViewState.LOADED);
+    activity.updateViewState(RepoListViewPresenter.ViewState.LOADED);
     assertThat(activity.tvError).isGone();
     assertThat(activity.tvEmpty).isGone();
     assertThat(activity.rvRepos).isVisible();
@@ -136,7 +133,7 @@ public class RepoListActivityTest {
   @Test
   public void updateViewStateCorrect_loading() {
     injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListActivityPresenter.ViewState.LOADING);
+    activity.updateViewState(RepoListViewPresenter.ViewState.LOADING);
     assertThat(activity.tvError).isGone();
     assertThat(activity.tvEmpty).isGone();
     assertThat(activity.rvRepos).isVisible();
@@ -146,7 +143,7 @@ public class RepoListActivityTest {
   @Test
   public void updateViewStateCorrect_empty() {
     injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListActivityPresenter.ViewState.EMPTY);
+    activity.updateViewState(RepoListViewPresenter.ViewState.EMPTY);
     assertThat(activity.tvError).isGone();
     assertThat(activity.rvRepos).isGone();
     assertThat(activity.tvEmpty).isVisible();

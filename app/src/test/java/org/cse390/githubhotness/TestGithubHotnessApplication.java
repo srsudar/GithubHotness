@@ -1,8 +1,8 @@
 package org.cse390.githubhotness;
 
-import org.cse390.githubhotness.ui.activity.RepoListActivity;
-import org.cse390.githubhotness.ui.activity.component.RepoListActivityComponent;
-import org.cse390.githubhotness.ui.activity.module.RepoListActivityModule;
+import org.cse390.githubhotness.injection.AppComponent;
+import org.cse390.githubhotness.injection.ui.activity.RepoListActivityComponent;
+import org.cse390.githubhotness.injection.ui.activity.RepoListActivityModule;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;

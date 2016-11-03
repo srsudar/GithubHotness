@@ -6,6 +6,7 @@ import org.cse390.githubhotness.logic.TimeStamper;
 import org.cse390.githubhotness.models.Repo;
 import org.cse390.githubhotness.net.SearchManager;
 import org.cse390.githubhotness.net.SearchResponse;
+import org.cse390.githubhotness.ui.view.presenter.RepoListViewPresenter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,10 +35,10 @@ import static org.mockito.Mockito.when;
     sdk = 22,
     application = TestGithubHotnessApplication.class
 )
-public class RepoListActivityPresenterTest {
-  RepoListActivityPresenter presenter;
+public class RepoListViewPresenterTest {
+  RepoListViewPresenter presenter;
   @Mock
-  RepoListActivityPresenter.PresenterCallbacks mockCallbacks;
+  RepoListViewPresenter.PresenterCallbacks mockCallbacks;
   @Mock
   SearchManager mockSearchManager;
   @Mock
@@ -46,7 +47,7 @@ public class RepoListActivityPresenterTest {
   @Before
   public void before() {
     MockitoAnnotations.initMocks(this);
-    presenter = new RepoListActivityPresenter(mockCallbacks,
+    presenter = new RepoListViewPresenter(mockCallbacks,
         mockSearchManager, mockTimeStamper);
   }
 
@@ -77,7 +78,7 @@ public class RepoListActivityPresenterTest {
   public void loadSearchResults_updatesViewToLoading() {
     loadSearchResultsHelper();
     verify(mockCallbacks, times(1))
-        .updateViewState(RepoListActivityPresenter.ViewState.LOADING);
+        .updateViewState(RepoListViewPresenter.ViewState.LOADING);
   }
 
   @Test
@@ -95,7 +96,7 @@ public class RepoListActivityPresenterTest {
 
     verify(mockCallbacks, times(1)).setRepos(repos);
     verify(mockCallbacks, times(1))
-        .updateViewState(RepoListActivityPresenter.ViewState.EMPTY);
+        .updateViewState(RepoListViewPresenter.ViewState.EMPTY);
   }
 
   @Test
@@ -108,7 +109,7 @@ public class RepoListActivityPresenterTest {
     subscriber.assertError(throwable);
 
     verify(mockCallbacks, times(1))
-        .updateViewState(RepoListActivityPresenter.ViewState.ERROR);
+        .updateViewState(RepoListViewPresenter.ViewState.ERROR);
   }
 
   @Test
@@ -133,6 +134,6 @@ public class RepoListActivityPresenterTest {
 
     verify(mockCallbacks, times(1)).setRepos(repos);
     verify(mockCallbacks, times(1))
-        .updateViewState(RepoListActivityPresenter.ViewState.LOADED);
+        .updateViewState(RepoListViewPresenter.ViewState.LOADED);
   }
 }

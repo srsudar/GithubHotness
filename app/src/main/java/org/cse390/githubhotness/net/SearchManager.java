@@ -19,8 +19,10 @@ public class SearchManager {
 
   public Observable<SearchResponse> getSearchResponse(String date,
       int perPage) {
+    String queryString = new QueryBuilder().dateCreated(date).build();
     return githubService
-        .searchMostPopularRepos(date, perPage)
+        .searchMostPopularRepos(GithubService.SortArgs.STARS, GithubService
+            .OrderArgs.DESCENDING, queryString, perPage)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
