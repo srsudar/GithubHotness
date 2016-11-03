@@ -38,8 +38,7 @@ public class RepoListActivityModule {
 
   @Provides
   @ActivityScope
-  RepoRecyclerViewAdapter provideRepoReyclerViewAdapter(
-      RepoListActivity repoListActivity, List<Repo> repos) {
+  RepoRecyclerViewAdapter provideRepoReyclerViewAdapter(List<Repo> repos) {
     return new RepoRecyclerViewAdapter(repos);
   }
 
@@ -58,8 +57,15 @@ public class RepoListActivityModule {
 
   @Provides
   @ActivityScope
+  RepoListActivityPresenter.PresenterCallbacks providePresenterCallbacks() {
+    return repoListActivity;
+  }
+
+  @Provides
+  @ActivityScope
   RepoListActivityPresenter provideRepoListActivityPresenter(
-      RepoListActivity repoListActivity, SearchManager searchManager) {
-    return new RepoListActivityPresenter(repoListActivity, searchManager);
+      RepoListActivityPresenter.PresenterCallbacks callbacks,
+      SearchManager searchManager) {
+    return new RepoListActivityPresenter(callbacks, searchManager);
   }
 }

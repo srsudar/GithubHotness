@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import org.cse390.githubhotness.AppModule;
 import org.cse390.githubhotness.GithubHotnessApplication;
 import org.cse390.githubhotness.R;
 import org.cse390.githubhotness.models.Repo;
@@ -27,13 +26,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
 
-import static org.cse390.githubhotness.ui.activity.RepoListActivity.RecyclerViewState.LOADING;
-
 /**
  * Created by sudars on 10/30/16.
  */
-
-public class RepoListActivity extends BaseActivity {
+public class RepoListActivity extends BaseActivity implements
+    RepoListActivityPresenter.PresenterCallbacks {
   @BindView(R.id.repos) RecyclerView rvRepos;
   @BindView(R.id.repos_error) TextView tvError;
   @BindView(R.id.repos_empty) TextView tvEmpty;
@@ -75,6 +72,7 @@ public class RepoListActivity extends BaseActivity {
     presenter.loadSearchResults();
   }
 
+  @Override
   public void setRepos(List<Repo> repos) {
     adapter.replaceDataset(repos);
   }
@@ -84,7 +82,8 @@ public class RepoListActivity extends BaseActivity {
     rvRepos.setLayoutManager(layoutManager);
   }
 
-  public void updateViewState(RecyclerViewState state) {
+  @Override
+  public void updateViewState(RepoListActivityPresenter.ViewState state) {
     switch (state) {
       case LOADING:
         tvError.setVisibility(View.GONE);
@@ -135,9 +134,5 @@ public class RepoListActivity extends BaseActivity {
     }
 
     return super.onOptionsItemSelected(item);
-  }
-
-  public enum RecyclerViewState {
-    LOADING, EMPTY, LOADED, ERROR
   }
 }

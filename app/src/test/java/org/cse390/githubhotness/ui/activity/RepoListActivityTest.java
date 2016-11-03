@@ -116,7 +116,7 @@ public class RepoListActivityTest {
   @Test
   public void updateViewStateCorrect_error() {
     injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListActivity.RecyclerViewState.ERROR);
+    activity.updateViewState(RepoListActivityPresenter.ViewState.ERROR);
     assertThat(activity.tvError).isVisible();
     assertThat(activity.tvEmpty).isGone();
     assertThat(activity.rvRepos).isGone();
@@ -126,7 +126,7 @@ public class RepoListActivityTest {
   @Test
   public void updateViewStateCorrect_loaded() {
     injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListActivity.RecyclerViewState.LOADED);
+    activity.updateViewState(RepoListActivityPresenter.ViewState.LOADED);
     assertThat(activity.tvError).isGone();
     assertThat(activity.tvEmpty).isGone();
     assertThat(activity.rvRepos).isVisible();
@@ -136,7 +136,7 @@ public class RepoListActivityTest {
   @Test
   public void updateViewStateCorrect_loading() {
     injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListActivity.RecyclerViewState.LOADING);
+    activity.updateViewState(RepoListActivityPresenter.ViewState.LOADING);
     assertThat(activity.tvError).isGone();
     assertThat(activity.tvEmpty).isGone();
     assertThat(activity.rvRepos).isVisible();
@@ -146,7 +146,7 @@ public class RepoListActivityTest {
   @Test
   public void updateViewStateCorrect_empty() {
     injectMockSwipeToRefresh();
-    activity.updateViewState(RepoListActivity.RecyclerViewState.EMPTY);
+    activity.updateViewState(RepoListActivityPresenter.ViewState.EMPTY);
     assertThat(activity.tvError).isGone();
     assertThat(activity.rvRepos).isGone();
     assertThat(activity.tvEmpty).isVisible();

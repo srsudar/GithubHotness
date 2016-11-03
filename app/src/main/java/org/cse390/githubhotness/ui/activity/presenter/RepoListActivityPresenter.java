@@ -1,8 +1,10 @@
 package org.cse390.githubhotness.ui.activity.presenter;
 
+import org.cse390.githubhotness.models.Repo;
 import org.cse390.githubhotness.net.SearchManager;
 import org.cse390.githubhotness.net.SearchResponse;
-import org.cse390.githubhotness.ui.activity.RepoListActivity;
+
+import java.util.List;
 
 import rx.Observer;
 import timber.log.Timber;
@@ -12,18 +14,26 @@ import timber.log.Timber;
  */
 
 public class RepoListActivityPresenter {
-  private RepoListActivity repoListActivity;
+  public enum ViewState {
+    LOADING, LOADED, EMPTY, ERROR
+  }
+
+  public interface PresenterCallbacks {
+    void updateViewState(ViewState viewState);
+    void setRepos(List<Repo> repos);
+  }
+
+  private PresenterCallbacks callbacks;
   private SearchManager searchManager;
 
-  public RepoListActivityPresenter(RepoListActivity repoListActivity,
+  public RepoListActivityPresenter(PresenterCallbacks callbacks,
       SearchManager searchManager) {
-    this.repoListActivity = repoListActivity;
+    this.callbacks = callbacks;
     this.searchManager = searchManager;
   }
 
   public void loadSearchResults() {
-    repoListActivity.updateViewState(
-        RepoListActivity.RecyclerViewState.LOADING);
+    callbacks.updateViewState(ViewState.LOADING);
     searchManager.getSearchResponse().subscribe(new Observer<SearchResponse>() {
       @Override
       public void onCompleted() {
@@ -33,15 +43,17 @@ public class RepoListActivityPresenter {
       @Override
       public void onError(Throwable e) {
         Timber.e(e);
-        repoListActivity.updateViewState(
-            RepoListActivity.RecyclerViewState.ERROR);
+        callbacks.updateViewState(ViewState.ERROR);
       }
 
       @Override
       public void onNext(SearchResponse searchResponse) {
-        repoListActivity.setRepos(searchResponse.getRepos());
-        repoListActivity.updateViewState(
-            RepoListActivity.RecyclerViewState.LOADED);
+        callbacks.setRepos(searchResponse.getRepos());
+        if (searchResponse.getRepos().isEmpty()) {
+          callbacks.updateViewState(ViewState.EMPTY);
+        } else {
+          callbacks.updateViewState(ViewState.LOADED);
+        }
       }
     });
   }

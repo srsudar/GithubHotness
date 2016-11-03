@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import org.cse390.githubhotness.models.Repo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sudars on 10/23/16.
@@ -14,7 +15,7 @@ public class SearchResponse {
   @SerializedName("items")
   private ArrayList<Repo> repos;
 
-  public ArrayList<Repo> getRepos() {
+  public List<Repo> getRepos() {
     return repos;
   }
 
