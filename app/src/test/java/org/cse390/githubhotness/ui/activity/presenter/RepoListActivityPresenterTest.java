@@ -2,6 +2,7 @@ package org.cse390.githubhotness.ui.activity.presenter;
 
 import org.cse390.githubhotness.BuildConfig;
 import org.cse390.githubhotness.TestGithubHotnessApplication;
+import org.cse390.githubhotness.logic.TimeStamper;
 import org.cse390.githubhotness.models.Repo;
 import org.cse390.githubhotness.net.SearchManager;
 import org.cse390.githubhotness.net.SearchResponse;
@@ -39,12 +40,14 @@ public class RepoListActivityPresenterTest {
   RepoListActivityPresenter.PresenterCallbacks mockCallbacks;
   @Mock
   SearchManager mockSearchManager;
+  @Mock
+  TimeStamper mockTimeStamper;
 
   @Before
   public void before() {
     MockitoAnnotations.initMocks(this);
     presenter = new RepoListActivityPresenter(mockCallbacks,
-        mockSearchManager);
+        mockSearchManager, mockTimeStamper);
   }
 
   private TestSubscriber<SearchResponse> setupError(Throwable throwable) {

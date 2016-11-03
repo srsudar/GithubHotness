@@ -2,8 +2,8 @@ package org.cse390.githubhotness.ui.activity.module;
 
 import android.support.v7.widget.LinearLayoutManager;
 
+import org.cse390.githubhotness.logic.TimeStamper;
 import org.cse390.githubhotness.models.Repo;
-import org.cse390.githubhotness.net.GithubService;
 import org.cse390.githubhotness.net.SearchManager;
 import org.cse390.githubhotness.ui.activity.ActivityScope;
 import org.cse390.githubhotness.ui.activity.RepoListActivity;
@@ -63,9 +63,16 @@ public class RepoListActivityModule {
 
   @Provides
   @ActivityScope
+  TimeStamper provideTimeStamper() {
+    return new TimeStamper();
+  }
+
+  @Provides
+  @ActivityScope
   RepoListActivityPresenter provideRepoListActivityPresenter(
       RepoListActivityPresenter.PresenterCallbacks callbacks,
-      SearchManager searchManager) {
-    return new RepoListActivityPresenter(callbacks, searchManager);
+      SearchManager searchManager, TimeStamper timeStamper) {
+    return new RepoListActivityPresenter(callbacks, searchManager,
+        timeStamper);
   }
 }

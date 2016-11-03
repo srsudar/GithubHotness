@@ -11,8 +11,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import rx.Observable;
-import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
@@ -48,7 +46,7 @@ public class SearchManagerTest {
     // for now.
     MockitoAnnotations.initMocks(this);
     Observable<SearchResponse> response = Observable.just(mockReponse);
-    when(mockGithubService.getRepos()).thenReturn(response);
+    when(mockGithubService.searchMostPopularRepos()).thenReturn(response);
 
     searchManager = new SearchManager(mockGithubService);
 

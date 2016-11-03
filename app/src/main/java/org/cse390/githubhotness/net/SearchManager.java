@@ -9,15 +9,18 @@ import rx.schedulers.Schedulers;
  */
 
 public class SearchManager {
+  public static final int DEFAULT_PER_PAGE = 25;
+
   private GithubService githubService;
 
   public SearchManager(GithubService githubService) {
     this.githubService = githubService;
   }
 
-  public Observable<SearchResponse> getSearchResponse() {
+  public Observable<SearchResponse> getSearchResponse(String date,
+      int perPage) {
     return githubService
-        .getRepos()
+        .searchMostPopularRepos(date, perPage)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread());
   }
