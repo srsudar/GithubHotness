@@ -2,7 +2,6 @@ package org.cse390.githubhotness.ui.view;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -16,7 +15,7 @@ import org.cse390.githubhotness.injection.ui.view.RepoListViewModule;
 import org.cse390.githubhotness.models.Repo;
 import org.cse390.githubhotness.persistence.PreferenceAccessor;
 import org.cse390.githubhotness.ui.view.presenter.RepoListViewPresenter;
-import org.cse390.githubhotness.widgets.RepoRecyclerViewAdapter;
+import org.cse390.githubhotness.ui.widget.RepoRecyclerViewAdapter;
 
 import java.util.List;
 

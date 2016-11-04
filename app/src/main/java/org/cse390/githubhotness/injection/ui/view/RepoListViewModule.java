@@ -10,7 +10,7 @@ import org.cse390.githubhotness.net.SearchManager;
 import org.cse390.githubhotness.persistence.PreferenceAccessor;
 import org.cse390.githubhotness.ui.view.presenter.RepoListViewPresenter;
 import org.cse390.githubhotness.ui.view.RepoListView;
-import org.cse390.githubhotness.widgets.RepoRecyclerViewAdapter;
+import org.cse390.githubhotness.ui.widget.RepoRecyclerViewAdapter;
 
 import java.util.ArrayList;
 

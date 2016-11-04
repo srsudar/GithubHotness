@@ -1,5 +1,7 @@
-package org.cse390.githubhotness.widgets;
+package org.cse390.githubhotness.ui.widget;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,19 @@ import java.util.List;
 public class RepoRecyclerViewAdapter extends RecyclerView.Adapter<RepoRecyclerViewAdapter
     .RepoViewHolder>{
   private List<Repo> dataset;
+  View.OnClickListener openRepoListener = new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+      RecyclerView.ViewHolder viewHolder =
+          (RecyclerView.ViewHolder) view.getTag();
+      int position = viewHolder.getAdapterPosition();
+      Repo repo = dataset.get(position);
+      Uri uri = Uri.parse(repo.getHtmlUrl());
+      Intent intent = new Intent(Intent.ACTION_VIEW);
+      intent.setData(uri);
+      view.getContext().startActivity(intent);
+    }
+  };
 
   public RepoRecyclerViewAdapter(List<Repo> dataset){
     this.dataset = dataset;
@@ -27,9 +42,11 @@ public class RepoRecyclerViewAdapter extends RecyclerView.Adapter<RepoRecyclerVi
     TextView name;
     TextView description;
     TextView stars;
+    View wholeView ;
 
     RepoViewHolder(View view) {
       super(view);
+      this.wholeView = view;
       this.name = (TextView) view.findViewById(R.id.repo_name);
       this.description = (TextView) view.findViewById(R.id.repo_description);
       this.stars = (TextView) view.findViewById(R.id.repo_stars);
@@ -47,6 +64,8 @@ public class RepoRecyclerViewAdapter extends RecyclerView.Adapter<RepoRecyclerVi
     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
     View repoView = inflater.inflate(R.layout.repo_view, parent, false);
     RepoViewHolder result = new RepoViewHolder(repoView);
+    repoView.setTag(result);
+    repoView.setOnClickListener(openRepoListener);
     return result;
   }
 

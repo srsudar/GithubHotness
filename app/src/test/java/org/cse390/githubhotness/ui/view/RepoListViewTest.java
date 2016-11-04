@@ -13,7 +13,8 @@ import org.cse390.githubhotness.injection.ui.view.RepoListViewComponent;
 import org.cse390.githubhotness.models.Repo;
 import org.cse390.githubhotness.persistence.PreferenceAccessor;
 import org.cse390.githubhotness.ui.view.presenter.RepoListViewPresenter;
-import org.cse390.githubhotness.widgets.RepoRecyclerViewAdapter;
+import org.cse390.githubhotness.ui.widget.RepoRecyclerViewAdapter;
+import org.cse390.githubhotness.ui.widget.RepoRecyclerViewAdapterTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,8 +28,6 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import dagger.Module;
 
 import static org.assertj.android.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;

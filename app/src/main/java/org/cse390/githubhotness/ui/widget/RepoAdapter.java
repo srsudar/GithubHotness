@@ -1,4 +1,4 @@
-package org.cse390.githubhotness.widgets;
+package org.cse390.githubhotness.ui.widget;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
