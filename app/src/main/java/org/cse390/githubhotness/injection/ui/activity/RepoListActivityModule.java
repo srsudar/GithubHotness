@@ -2,6 +2,7 @@ package org.cse390.githubhotness.injection.ui.activity;
 
 import org.cse390.githubhotness.injection.ui.activity.ActivityScope;
 import org.cse390.githubhotness.ui.activity.RepoListActivity;
+import org.cse390.githubhotness.ui.activity.presenter.RepoListActivityPresenter;
 import org.cse390.githubhotness.ui.widget.RepoListPagerAdapter;
 
 import dagger.Module;
@@ -31,5 +32,11 @@ public class RepoListActivityModule {
   @ActivityScope
   RepoListPagerAdapter provideRepoListPagerAdapter() {
     return new RepoListPagerAdapter(repoListActivity);
+  }
+
+  @Provides
+  @ActivityScope
+  RepoListActivityPresenter provideRepoListActivityPresenter() {
+    return new RepoListActivityPresenter(repoListActivity);
   }
 }
