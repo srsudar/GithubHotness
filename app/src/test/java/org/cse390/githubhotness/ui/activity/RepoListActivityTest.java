@@ -51,14 +51,12 @@ public class RepoListActivityTest {
 
   @Mock
   RepoListActivityComponent mockRepoListActivityComponent;
+  @Mock
   RepoListPagerAdapter repoListPagerAdapter;
 
   @Before
   public void before() {
     MockitoAnnotations.initMocks(this);
-
-    repoListPagerAdapter = new RepoListPagerAdapter(RuntimeEnvironment
-        .application);
 
     doAnswer(new Answer() {
       @Override

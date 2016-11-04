@@ -58,11 +58,10 @@ public class RepoListViewPresenter {
     return result;
   }
 
-  public void loadSearchResults(final SearchPeriod searchPeriod) {
+  public void loadSearchResults(final SearchPeriod searchPeriod, int perPage) {
     callbacks.updateViewState(RepoListView.ViewState.LOADING);
     String dateString = getStringForPeriod(searchPeriod);
-    searchManager.getSearchResponse(dateString,
-        SearchManager.DEFAULT_PER_PAGE)
+    searchManager.getSearchResponse(dateString, perPage)
         .subscribe(new Observer<SearchResponse>() {
       @Override
       public void onCompleted() {

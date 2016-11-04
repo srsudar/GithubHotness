@@ -37,6 +37,8 @@ import static org.mockito.Mockito.when;
     application = TestGithubHotnessApplication.class
 )
 public class RepoListViewPresenterTest {
+  private static final int PER_PAGE = 25;
+
   RepoListViewPresenter presenter;
   @Mock
   RepoListViewPresenter.PresenterCallbacks mockCallbacks;
@@ -91,7 +93,8 @@ public class RepoListViewPresenterTest {
     response.setRepos(repos);
     TestSubscriber<SearchResponse> subscriber = setupRepoResponse(response);
 
-    presenter.loadSearchResults(RepoListViewPresenter.SearchPeriod.MONTH);
+    presenter.loadSearchResults(RepoListViewPresenter.SearchPeriod.MONTH,
+        PER_PAGE);
 
     subscriber.assertNoErrors();
     subscriber.assertValue(response);
@@ -107,7 +110,8 @@ public class RepoListViewPresenterTest {
     Throwable throwable = new IOException();
     TestSubscriber<SearchResponse> subscriber = setupError(throwable);
 
-    presenter.loadSearchResults(RepoListViewPresenter.SearchPeriod.MONTH);
+    presenter.loadSearchResults(RepoListViewPresenter.SearchPeriod.MONTH,
+        PER_PAGE);
 
     subscriber.assertError(throwable);
 
@@ -129,7 +133,8 @@ public class RepoListViewPresenterTest {
     response.setRepos(repos);
     TestSubscriber<SearchResponse> subscriber = setupRepoResponse(response);
 
-    presenter.loadSearchResults(RepoListViewPresenter.SearchPeriod.MONTH);
+    presenter.loadSearchResults(RepoListViewPresenter.SearchPeriod.MONTH,
+        PER_PAGE);
 
     subscriber.assertNoErrors();
     subscriber.assertValue(response);

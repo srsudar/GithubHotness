@@ -1,5 +1,7 @@
 package org.cse390.githubhotness.net;
 
+import org.cse390.githubhotness.persistence.PreferenceAccessor;
+
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -9,8 +11,6 @@ import rx.schedulers.Schedulers;
  */
 
 public class SearchManager {
-  public static final int DEFAULT_PER_PAGE = 25;
-
   private GithubService githubService;
 
   public SearchManager(GithubService githubService) {

@@ -1,5 +1,6 @@
 package org.cse390.githubhotness.ui.view;
 
+import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import org.cse390.githubhotness.R;
 import org.cse390.githubhotness.TestGithubHotnessApplication;
 import org.cse390.githubhotness.injection.ui.view.RepoListViewComponent;
 import org.cse390.githubhotness.models.Repo;
+import org.cse390.githubhotness.persistence.PreferenceAccessor;
 import org.cse390.githubhotness.ui.view.presenter.RepoListViewPresenter;
 import org.cse390.githubhotness.widgets.RepoRecyclerViewAdapter;
 import org.junit.Before;
@@ -44,6 +46,8 @@ import static org.mockito.Mockito.when;
     application = TestGithubHotnessApplication.class
 )
 public class RepoListViewTest {
+  private static final int DEFAULT_PER_PAGE = 7;
+
   RepoListView repoListView;
 
   @Mock
@@ -54,6 +58,8 @@ public class RepoListViewTest {
   RepoListViewComponent mockComponent;
   @Mock
   SwipeRefreshLayout mockRefreshLayout;
+  @Mock
+  PreferenceAccessor mockPreferenceAccessor;
 
   RecyclerView.LayoutManager layoutManager;
   RepoListViewPresenter.SearchPeriod searchPeriod;
@@ -61,6 +67,8 @@ public class RepoListViewTest {
   @Before
   public void before() {
     MockitoAnnotations.initMocks(this);
+    when(mockPreferenceAccessor.getPerPagePreference(any(Context.class)))
+        .thenReturn(DEFAULT_PER_PAGE);
     layoutManager = new LinearLayoutManager(RuntimeEnvironment.application);
     searchPeriod = RepoListViewPresenter.SearchPeriod.MONTH;
 
@@ -74,6 +82,7 @@ public class RepoListViewTest {
             view.layoutManager = layoutManager;
             view.searchPeriod = searchPeriod;
             view.refreshLayout = mockRefreshLayout;
+            view.preferenceAccessor = mockPreferenceAccessor;
             return null;
           }
     });
@@ -87,6 +96,16 @@ public class RepoListViewTest {
     repoListView = (RepoListView) inflater.inflate(R.layout
         .inflatable_repo_list_view,
         null);
+  }
+
+  @Test
+  public void loadSearchResults_callsPresenter() {
+    RepoListViewPresenter.SearchPeriod expected = RepoListViewPresenter
+        .SearchPeriod.DAY;
+    repoListView.setSearchPeriod(expected);
+    repoListView.loadSearchResults();
+    verify(mockPresenter, times(1)).loadSearchResults(RepoListViewPresenter
+        .SearchPeriod.DAY, DEFAULT_PER_PAGE);
   }
 
   @Test

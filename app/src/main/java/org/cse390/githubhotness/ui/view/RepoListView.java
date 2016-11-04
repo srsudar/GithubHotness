@@ -14,6 +14,7 @@ import org.cse390.githubhotness.GithubHotnessApplication;
 import org.cse390.githubhotness.R;
 import org.cse390.githubhotness.injection.ui.view.RepoListViewModule;
 import org.cse390.githubhotness.models.Repo;
+import org.cse390.githubhotness.persistence.PreferenceAccessor;
 import org.cse390.githubhotness.ui.view.presenter.RepoListViewPresenter;
 import org.cse390.githubhotness.widgets.RepoRecyclerViewAdapter;
 
@@ -44,6 +45,7 @@ public class RepoListView extends LinearLayout implements
   @Inject RecyclerView.LayoutManager layoutManager;
   @Inject RepoListViewPresenter presenter;
   @Inject RepoListViewPresenter.SearchPeriod searchPeriod;
+  @Inject PreferenceAccessor preferenceAccessor;
 
   public RepoListView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -84,7 +86,8 @@ public class RepoListView extends LinearLayout implements
   }
 
   public void loadSearchResults() {
-    presenter.loadSearchResults(searchPeriod);
+    presenter.loadSearchResults(searchPeriod, preferenceAccessor
+        .getPerPagePreference(getContext()));
   }
 
   @Override

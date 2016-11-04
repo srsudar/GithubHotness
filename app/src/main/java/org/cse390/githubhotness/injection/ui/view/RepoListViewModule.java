@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import org.cse390.githubhotness.logic.TimeStamper;
 import org.cse390.githubhotness.models.Repo;
 import org.cse390.githubhotness.net.SearchManager;
+import org.cse390.githubhotness.persistence.PreferenceAccessor;
 import org.cse390.githubhotness.ui.view.presenter.RepoListViewPresenter;
 import org.cse390.githubhotness.ui.view.RepoListView;
 import org.cse390.githubhotness.widgets.RepoRecyclerViewAdapter;
@@ -69,8 +70,15 @@ public class RepoListViewModule {
   }
 
   @Provides
+  @ViewScope
   RepoListViewPresenter.SearchPeriod provideSearchPeriod() {
     // Month by default?
     return RepoListViewPresenter.SearchPeriod.MONTH;
+  }
+
+  @Provides
+  @ViewScope
+  PreferenceAccessor providePreferenceAccessor() {
+    return new PreferenceAccessor();
   }
 }
