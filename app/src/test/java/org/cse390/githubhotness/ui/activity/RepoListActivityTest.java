@@ -8,7 +8,9 @@ import org.cse390.githubhotness.BuildConfig;
 import org.cse390.githubhotness.TestGithubHotnessApplication;
 import org.cse390.githubhotness.models.Repo;
 import org.cse390.githubhotness.injection.ui.activity.RepoListActivityComponent;
+import org.cse390.githubhotness.ui.view.RepoListView;
 import org.cse390.githubhotness.ui.view.presenter.RepoListViewPresenter;
+import org.cse390.githubhotness.ui.widget.RepoListPagerAdapter;
 import org.cse390.githubhotness.widgets.RepoRecyclerViewAdapter;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +35,7 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by sudars on 11/1/16.
@@ -48,21 +51,21 @@ public class RepoListActivityTest {
 
   @Mock
   RepoListActivityComponent mockRepoListActivityComponent;
+  RepoListPagerAdapter repoListPagerAdapter;
 
   @Before
   public void before() {
     MockitoAnnotations.initMocks(this);
+
+    repoListPagerAdapter = new RepoListPagerAdapter(RuntimeEnvironment
+        .application);
 
     doAnswer(new Answer() {
       @Override
       public Object answer(InvocationOnMock invocation) {
         RepoListActivity activity = (RepoListActivity)
             invocation.getArguments()[0];
-//        activity.presenter = mockPresenter;
-//        activity.adapter = mockAdapter;
-//        activity.layoutManager = new LinearLayoutManager(
-//            RuntimeEnvironment.application
-//        );
+        activity.pagerAdapter = repoListPagerAdapter;
         return null;
       }
     })
@@ -80,12 +83,4 @@ public class RepoListActivityTest {
   public void notNull() {
     assertThat(activity).isNotNull();
   }
-
-//  @Test
-//  public void searchResultsAutoLoad() {
-//    verify(mockPresenter, times(1)).loadSearchResults();
-//  }
-
-
-
 }
