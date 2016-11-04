@@ -3,7 +3,7 @@ package org.cse390.githubhotness.ui.activity.presenter;
 import android.content.Context;
 import android.content.Intent;
 
-import org.cse390.githubhotness.SettingsActivity;
+import org.cse390.githubhotness.ui.activity.SettingsActivity;
 
 /**
  * Created by sudars on 11/3/16.

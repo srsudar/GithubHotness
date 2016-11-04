@@ -59,6 +59,19 @@
         <item>-1</item>
     </string-array>
 
+    <string name="pref_title_items_per_page">Items per Page</string>
+    <string-array name="pref_items_per_page_titles">
+        <item>5</item>
+        <item>15</item>
+        <item>25</item>
+    </string-array>
+
+    <string-array name="pref_items_per_page_values">
+        <item>5</item>
+        <item>15</item>
+        <item>25</item>
+    </string-array>
+
     <string-array name="list_preference_entries">
         <item>Entry 1</item>
         <item>Entry 2</item>
