@@ -15,6 +15,11 @@
             android:id="@+id/repos_tab_layout"
             app:tabMode="fixed"
             app:tabGravity="fill"
+            app:tabBackground="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="@color/colorTextIcons"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorHeight="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

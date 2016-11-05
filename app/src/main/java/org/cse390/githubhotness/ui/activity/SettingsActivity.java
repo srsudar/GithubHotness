@@ -3,7 +3,9 @@ package org.cse390.githubhotness.ui.activity;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Transition;
 import android.view.MenuItem;
+import android.view.Window;
 
 import org.cse390.githubhotness.R;
 
