@@ -1,5 +1,6 @@
 package org.cse390.githubhotness.ui.activity;
 
+import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
@@ -102,8 +103,18 @@ public class RepoListActivity extends BaseActivity implements
 
   @Override
   public void startActivityForIntent(Intent intent) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      startActivityWithAnimation(intent);
+    } else {
+      startActivity(intent);
+    }
+  }
+
+  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+  protected void startActivityWithAnimation(Intent intent) {
     Transition exit = new Slide(Gravity.BOTTOM);
     getWindow().setExitTransition(exit);
+    // Though this is a warning, the Android docs say to do it this way.
     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation
         (this);
     startActivity(intent, options.toBundle());
