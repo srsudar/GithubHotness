@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import org.cse390.githubhotness.R;
@@ -20,6 +22,7 @@ import java.util.List;
 public class RepoRecyclerViewAdapter extends RecyclerView.Adapter<RepoRecyclerViewAdapter
     .RepoViewHolder>{
   private List<Repo> dataset;
+  private int lastAnimatedPosition = -1;
   View.OnClickListener openRepoListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -54,9 +57,11 @@ public class RepoRecyclerViewAdapter extends RecyclerView.Adapter<RepoRecyclerVi
   }
 
   public void replaceDataset(List<Repo> repos) {
-    this.dataset.clear();
+    int originalSize = dataset.size();
+    dataset.clear();
+    notifyItemRangeRemoved(0, originalSize);
     this.dataset.addAll(repos);
-    notifyDataSetChanged();
+    notifyItemRangeInserted(0, dataset.size());
   }
 
   @Override
