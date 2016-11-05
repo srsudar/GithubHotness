@@ -67,7 +67,7 @@ public class RepoListView extends LinearLayout implements
     ButterKnife.bind(this);
     setupViewComponent(context);
 
-    refreshLayout.setColorSchemeColors(
+    refreshLayout.setColorSchemeResources(
         R.color.refresh_progress_1,
         R.color.refresh_progress_2,
         R.color.refresh_progress_3);

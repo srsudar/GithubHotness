@@ -9,8 +9,8 @@
   <color name="colorTextIcons">#FFFFFF</color>
   <color name="colorDivider">#BDBDBD</color>
 
-  <color name="refresh_progress_1">@color/colorAccent</color>
-  <color name="refresh_progress_2">@color/colorPrimaryLight</color>
-  <color name="refresh_progress_3">@color/colorPrimary</color>
+  <color name="refresh_progress_1">@color/colorPrimary</color>
+  <color name="refresh_progress_2">@color/colorAccent</color>
+  <color name="refresh_progress_3">@color/colorPrimaryLight</color>
 
 </resources>
