@@ -10,7 +10,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="@dimen/activity_horizontal_margin"
-    card_view:cardBackgroundColor="@color/colorPrimaryLight"
+    card_view:cardBackgroundColor="@color/colorDivider"
     card_view:cardCornerRadius="4dp" >
 
       <LinearLayout
@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/repo_name"
         android:text="name"
-        android:textStyle="bold"
+        android:textAppearance="?android:textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
