@@ -1,5 +1,9 @@
 package org.cse390.githubhotness.ui.activity;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,13 +19,20 @@ public class SettingsActivity extends BaseActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-    getWindow().setEnterTransition(new Slide(Gravity.BOTTOM));
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      setupAnimation();
+    }
 
     getFragmentManager().beginTransaction().replace(android.R.id.content,
         new PrefsFragment()).commit();
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+  }
+
+  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+  protected void setupAnimation() {
+    getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+    getWindow().setEnterTransition(new Slide(Gravity.BOTTOM));
   }
 
   @Override
@@ -46,4 +57,6 @@ public class SettingsActivity extends BaseActivity {
       addPreferencesFromResource(R.xml.pref_general);
     }
   }
+
+
 }
