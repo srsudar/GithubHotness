@@ -1,13 +1,23 @@
 package org.cse390.githubhotness.ui.activity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionManager;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.view.Window;
 
 import org.cse390.githubhotness.BuildConfig;
 import org.cse390.githubhotness.GithubHotnessApplication;
@@ -43,6 +53,8 @@ public class RepoListActivity extends BaseActivity implements
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
     setContentView(R.layout.activity_repo_list);
     ButterKnife.bind(this);
     setSupportActionBar(toolbar);
@@ -90,6 +102,10 @@ public class RepoListActivity extends BaseActivity implements
 
   @Override
   public void startActivityForIntent(Intent intent) {
-    startActivity(intent);
+    Transition exit = new Slide(Gravity.BOTTOM);
+    getWindow().setExitTransition(exit);
+    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation
+        (this);
+    startActivity(intent, options.toBundle());
   }
 }

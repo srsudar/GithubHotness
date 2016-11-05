@@ -3,7 +3,9 @@ package org.cse390.githubhotness.ui.activity;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Slide;
 import android.transition.Transition;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.Window;
 
@@ -13,6 +15,9 @@ public class SettingsActivity extends BaseActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+    getWindow().setEnterTransition(new Slide(Gravity.BOTTOM));
+
     getFragmentManager().beginTransaction().replace(android.R.id.content,
         new PrefsFragment()).commit();
 
