@@ -16,12 +16,12 @@ import org.cse390.githubhotness.ui.view.RepoListView;
 
 public class RepoListPagerAdapter extends PagerAdapter {
   public enum PagerPositions {
-    MONTH(R.string.month, RepoListViewPresenter.SearchPeriod.MONTH, R.id
-        .repos_month),
+    DAY(R.string.day, RepoListViewPresenter.SearchPeriod.DAY, R.id
+        .repos_day),
     WEEK(R.string.week, RepoListViewPresenter.SearchPeriod.WEEK, R.id
         .repos_week),
-    DAY(R.string.day, RepoListViewPresenter.SearchPeriod.DAY, R.id
-        .repos_day);
+    MONTH(R.string.month, RepoListViewPresenter.SearchPeriod.MONTH, R.id
+        .repos_month);
 
     private int titleResId;
     private int viewId;
