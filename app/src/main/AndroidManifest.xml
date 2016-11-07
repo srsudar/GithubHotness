@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.cse390.githubhotness">
+          package="com.samsudar.githubhotness">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -22,10 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".SettingsActivity"
+                android:name=".ui.activity.SettingsActivity"
                 android:label="@string/title_activity_settings">
-        </activity>
-        <activity android:name=".ui.activity.SettingsActivity">
         </activity>
     </application>
 
