@@ -1,5 +1,7 @@
 package com.samsudar.githubhotness;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import android.app.Application;
 import android.content.Context;
 
@@ -22,6 +24,7 @@ import timber.log.Timber;
  */
 public class GithubHotnessApplication extends Application {
   private AppComponent appComponent;
+  private FirebaseAnalytics mAnalytics;
 
   public static GithubHotnessApplication get(Context context) {
     // Seems to be just a convenience method to static cast an application
@@ -33,6 +36,7 @@ public class GithubHotnessApplication extends Application {
   public void onCreate() {
     super.onCreate();
     JodaTimeAndroid.init(this);
+    mAnalytics = FirebaseAnalytics.getInstance(this);
     if (BuildConfig.DEBUG) {
       Timber.plant(new Timber.DebugTree());
     }
