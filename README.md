@@ -2,6 +2,8 @@
 
 > Stay up to date with the repos all the cool kids are starring.
 
+[![Build Status](https://travis-ci.org/srsudar/GithubHotness.svg?branch=master)](https://travis-ci.org/srsudar/GithubHotness)
+
 <p align="center">
   <img alt="Github Hotness Icon" src="./assets/icon_192.png"/>
 </p>
