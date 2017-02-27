@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Don't fail on okio java.nio dependency.
+         See https://github.com/square/okio/issues/58 -->
+    <issue id="InvalidPackage" severity="error">
+        <ignore regexp="okio.*jar" />
+        <ignore regexp="retrofit.*jar" />
+    </issue>
+</lint>
+
