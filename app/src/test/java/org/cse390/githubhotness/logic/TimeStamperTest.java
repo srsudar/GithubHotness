@@ -36,7 +36,7 @@ public class TimeStamperTest {
   @Before
   public void before() {
     timeStamper = new TimeStamper();
-    nov_03_2016 = new DateTime("2016-11-03T11:05:00.000-07:00");
+    nov_03_2016 = new DateTime("2016-11-03T18:05:00.000Z");
   }
 
   @Test
@@ -56,7 +56,7 @@ public class TimeStamperTest {
 
   @Test
   public void get24HoursAgo() {
-    String expected = "2016-11-02T11:05:00-07:00";
+    String expected = "2016-11-02T18:05:00Z";
     String actual = timeStamper.get24HoursAgo(nov_03_2016);
     assertThat(actual).isEqualTo(expected);
   }
