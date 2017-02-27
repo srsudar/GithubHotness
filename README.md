@@ -13,9 +13,9 @@ shows you repos that have been created in the last 24 hours, week, or month,
 that have been starred by the most users.
 
 It is very similar to the [Github Explore](https://github.com/explore) daily
-email, except that that shows repos that have received the most stars, whereas
-this shows only the repos that have received the most stars **and** that have
-been created in the time window.
+email, except that the email shows repos that have received the most stars,
+whereas The Hotness shows only the repos that have received the most stars
+**and** that have been created in the time window.
 
 ## Why?
 
