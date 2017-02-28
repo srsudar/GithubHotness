@@ -1,18 +1,18 @@
-# Github Hotness
+# The Hotness
 
-> Stay up to date with the repos all the cool kids are starring.
+> Stay up to date with the new Github repos all the cool kids are starring.
 
 [![Build Status](https://travis-ci.org/srsudar/GithubHotness.svg?branch=master)](https://travis-ci.org/srsudar/GithubHotness)
 
 <p align="center">
-  <img alt="Github Hotness Icon" src="./assets/icon_192.png"/>
+  <img alt="The Hotness Icon" src="./assets/icon_192.png"/>
 </p>
 
 ## Overview
 
-Github Hotness, aka The Hotness, shows you the trending new repos on Github. It
-shows you repos that have been created in the last 24 hours, week, or month,
-that have been starred by the most users.
+The Hotness shows you the trending new repos on Github. It grabs the repos that
+have been created in the last 24 hours, week, or month, that have been starred
+by the most users.
 
 It is very similar to the [Github Explore](https://github.com/explore) daily
 email, except that the email shows repos that have received the most stars,
