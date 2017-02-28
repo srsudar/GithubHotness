@@ -10,14 +10,19 @@
 
 ## Overview
 
-The Hotness shows you the trending new repos on Github. It grabs the repos that
-have been created in the last 24 hours, week, or month, that have been starred
-by the most users.
+[The
+Hotness](https://play.google.com/store/apps/details?id=com.samsudar.thehotness)
+shows you the trending new repos on Github. It grabs the repos that have been
+created in the last 24 hours, week, or month, that have been starred by the
+most users.
 
 It is very similar to the [Github Explore](https://github.com/explore) daily
 email, except that the email shows repos that have received the most stars,
 whereas The Hotness shows only the repos that have received the most stars
 **and** that have been created in the time window.
+
+[Get it on Google
+Play.](https://play.google.com/store/apps/details?id=com.samsudar.thehotness&hl=en)
 
 ## Why?
 
