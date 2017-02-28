@@ -5,7 +5,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "24.0.2"
     defaultConfig {
-        applicationId "org.cse390.githubhotness"
+        applicationId "com.samsudar.thehotness"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1

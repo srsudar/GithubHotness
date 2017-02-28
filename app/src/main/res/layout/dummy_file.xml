@@ -5,17 +5,17 @@
               android:layout_height="match_parent">
 
     <!-- This isn't inflated, it's just here to create safe ids for us to use in code. -->
-    <org.cse390.githubhotness.ui.view.RepoListView
+    <com.samsudar.thehotness.ui.view.RepoListView
             android:id="@+id/repos_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-    <org.cse390.githubhotness.ui.view.RepoListView
+    <com.samsudar.thehotness.ui.view.RepoListView
             android:id="@+id/repos_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-    <org.cse390.githubhotness.ui.view.RepoListView
+    <com.samsudar.thehotness.ui.view.RepoListView
             android:id="@+id/repos_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
