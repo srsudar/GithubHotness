@@ -38,4 +38,6 @@ It also uses a number of popular libraries, like
 [Butterknife](https://jakewharton.github.io/butterknife/), and
 [RxJava](https://github.com/ReactiveX/RxJava).
 
-<img alt="Screenshot" src="./assets/screenshot_1.png" width="400px"/>
+<p align="center">
+  <img alt="Screenshot" src="./assets/screenshot_1.png" width="400px"/>
+</p>
